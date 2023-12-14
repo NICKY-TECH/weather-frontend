@@ -1,10 +1,11 @@
+import { Outlet } from "react-router-dom";
 import "../styles/destination.css";
-import Registration from "./Registration";
 
 function Main() {
   return (
     <main>
-      <Registration/> 
+<Outlet/>
+
     </main>
   );
 }

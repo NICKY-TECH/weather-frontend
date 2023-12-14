@@ -12,6 +12,7 @@ function Registration() {
     setInterval(() => {
       actions.resetForm;
     }, 1000);
+    console.log(values)
   }
 
   const formik = useFormik({

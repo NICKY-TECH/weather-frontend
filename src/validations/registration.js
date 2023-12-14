@@ -10,7 +10,7 @@ const regSchema = yup.object().shape({
     .required("The email field cannot be left empty"),
   password: yup
     .string()
-    .min(8, { length:'Password must be atleast 8 characters long'})
+    .min(8, { length: "Password must be atleast 8 characters long" })
     .matches(pattern, {
       message:
         "Your password must contain at least one digit, one lowercase letter, one uppercase letter, and one special character.",
@@ -18,8 +18,9 @@ const regSchema = yup.object().shape({
     .required("The password field cannot be empty"),
   confirmpassword: yup
     .string()
+    .required("Confirm Password field cannot be empty")
     .oneOf(
-      [yup.ref("password"), null],
+      [yup.ref("password")],
       "This field must be same as the password field"
     ),
 });

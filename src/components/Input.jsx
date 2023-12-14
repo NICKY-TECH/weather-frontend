@@ -15,7 +15,7 @@ function Input(props) {
           id={props.id}
           name={props.name}
           value={props.value}
-          className="child bg-gray-50 border border-gray-300 text-sm rounded-lg block max-[639px]:w-11/12 sm:w-10/12 p-2.5"
+          className={props.error ? "child bg-gray-50 border-4 border-red-600 outlin outline-red-700 text-sm rounded-lg block max-[639px]:w-11/12 sm:w-10/12 p-2.5":"child bg-gray-50 border border-gray-300 text-sm rounded-lg block max-[639px]:w-11/12 sm:w-10/12 p-2.5"}
           placeholder={props.placeholder}
           required
           autoComplete='off'

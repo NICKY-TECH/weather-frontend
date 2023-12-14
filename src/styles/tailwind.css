@@ -4,11 +4,19 @@
 
 body,
 html {
-  @apply h-full w-full;
+  @apply h-full w-full bg-red-200;
 }
 
 main {
-  @apply max-[639px]:min-h-min max-[639px]:min-w-min  sm:h-full lg:h-screen sm:w-full  bg-red-200 flex justify-center items-center flex-col space-y-4 pb-3;
+  @apply max-[639px]:min-h-min max-[639px]:min-w-min  sm:h-full lg:h-screen sm:w-full  flex justify-center items-center flex-col space-y-4 pb-3;
+}
+
+section {
+  @apply justify-center items-center  h-full;
+}
+
+article {
+  @apply h-[80%] flex;
 }
 
 .app-wrapper {
@@ -18,7 +26,6 @@ main {
 .child {
   background-color: rgba(255, 255, 255, 0.45);
   border-radius: 20px;
-  border: 1px solid rgba(255, 255, 255, 0.25);
   box-shadow: 0 0 10px 1px rgba(0, 0, 0, 0.25);
   backdrop-filter: blur(15px);
 }
@@ -28,7 +35,20 @@ main {
 }
 
 form {
-  @apply h-auto  max-[639px]:w-[90%] sm:w-[60%] pb-10;
+  @apply h-auto max-[639px]:w-[90%] sm:w-[60%] pb-10;
+  padding: 35px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  background-color: rgba(255, 255, 255, 0.45);
+  border-radius: 20px;
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  box-shadow: 0 0 10px 1px rgba(0, 0, 0, 0.25);
+  backdrop-filter: blur(15px);
+}
+
+article {
+  @apply max-[639px]:w-[90%] sm:w-[50%] pb-10;
   padding: 35px;
   display: flex;
   flex-direction: column;
@@ -49,10 +69,14 @@ form {
 }
 
 .onboarding-heading h1 {
-    @apply font-bold max-[639px]:text-[1.3rem] sm:text-[2rem] max-[639px]:mx-auto;
-  }
-  
-  .onboarding-heading p {
-    font-size: 1.2rem;
-    color: hsl(0, 0%, 50%);
-  }
+  @apply font-bold max-[639px]:text-[1.3rem] sm:text-[2rem] max-[639px]:mx-auto;
+}
+
+.onboarding-heading p {
+  font-size: 1.2rem;
+  color: hsl(0, 0%, 50%);
+}
+
+.error {
+  @apply text-red-700 font-bold;
+}
