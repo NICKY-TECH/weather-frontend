@@ -15,10 +15,10 @@ function App() {
     createRoutesFromElements(
       <Route>
         <Route path="/" element={<Main />}>
-          <Route path="/registration" element={<Registration />} />
-          <Route path="/login" element={<Login />} />
+          <Route path="registration" element={<Registration />} />
+          <Route path="login" element={<Login />} />
         </Route>
-        <Route path="/dashboard" element={<Dashboard />} loader={ DashboardLoader }/>
+        <Route path="dashboard" element={<Dashboard />} loader={ DashboardLoader }/>
       </Route>
     )
   );
