@@ -2,7 +2,7 @@ import * as yup from "yup";
 
 const pattern =
   /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$%^&*()_+\-=[\]{};':"\\|,.<>/?]).{8,16}$/;
-const regSchema = yup.object().shape({
+const loginSchema = yup.object().shape({
   email: yup
     .string()
     .email("Enter, a valid email adddress")
@@ -17,4 +17,4 @@ const regSchema = yup.object().shape({
     .required("The password field cannot be empty"),
 });
 
-export default regSchema;
+export default loginSchema;

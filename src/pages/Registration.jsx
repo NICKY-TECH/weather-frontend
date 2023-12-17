@@ -5,14 +5,47 @@ import Submit from "../components/Submit";
 import "../styles/destination.css";
 import weather from "../resources/images/2682849_cloud_cloudy_day_forecast_sun_icon.png";
 import { useFormik } from "formik/dist";
+import { useNavigate } from "react-router-dom";
 import regSchema from "../validations/registration";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+
 
 function Registration() {
-  function OnSubmit({ values, actions }) {
-    setInterval(() => {
-      actions.resetForm;
-    }, 1000);
-    console.log(values)
+  const navigate = useNavigate();
+  async function submit() {
+    try {
+      const register = await fetch(
+        "https://new-weather-app-ehzj.onrender.com/registration",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            email: formik.values.email,
+            password: formik.values.password,
+            name: formik.values.name,
+            confirmpassword: formik.values.confirmpassword,
+          }),
+        }
+      );
+      console.log("jons");
+      const value = await register.json();
+      if (value.success == true) {
+        toast.success("Account registration was successful",{
+          autoClose:5000
+        });
+       setTimeout(()=>{
+        navigate("/login");
+       },5000)
+      } else if (value.success == false) {
+        toast.error("An error occurred while creating your account");
+      }
+      console.log(value);
+    } catch (e) {
+      console.log(e);
+    }
   }
 
   const formik = useFormik({
@@ -23,12 +56,13 @@ function Registration() {
       confirmpassword: "",
     },
     validationSchema: regSchema,
-    OnSubmit,
+    onSubmit: submit,
   });
   console.log(formik);
 
   return (
     <>
+    <ToastContainer/>
       <div className="onboarding-heading">
         <Heading
           heading="Welcome to WeatherInfo !"
@@ -46,8 +80,8 @@ function Registration() {
           id="name"
           change={formik.handleChange}
           blur={formik.handleBlur}
-          error = {formik.errors.name && formik.touched.name }
-          errormsg = {formik.errors.name}
+          error={formik.errors.name && formik.touched.name}
+          errormsg={formik.errors.name}
         />
         <Input
           type="email"
@@ -58,9 +92,10 @@ function Registration() {
           name="email"
           change={formik.handleChange}
           blur={formik.handleBlur}
-          error = {formik.errors.email && formik.touched.email }
-          errormsg = {formik.errors.email}
+          error={formik.errors.email && formik.touched.email}
+          errormsg={formik.errors.email}
         />
+       
         <Input
           type="password"
           id="password"
@@ -70,8 +105,8 @@ function Registration() {
           name="password"
           change={formik.handleChange}
           blur={formik.handleBlur}
-          error = {formik.errors.password && formik.touched.password }
-          errormsg = {formik.errors.password}
+          error={formik.errors.password && formik.touched.password}
+          errormsg={formik.errors.password}
         />
         <Input
           type="password"
@@ -82,11 +117,13 @@ function Registration() {
           name="confirmpassword"
           change={formik.handleChange}
           blur={formik.handleBlur}
-          error = {formik.errors.confirmpassword && formik.touched.confirmpassword }
-          errormsg ={formik.errors.confirmpassword}
+          error={
+            formik.errors.confirmpassword && formik.touched.confirmpassword
+          }
+          errormsg={formik.errors.confirmpassword}
         />
         <Submit text="Create account" />
-        <Redirect text="Already have an account? Signin" />
+        <Redirect text="Already have an account? Signin" link="https://weather-frontend-beige.vercel.app/login"/>
       </form>
     </>
   );

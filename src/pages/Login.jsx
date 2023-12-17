@@ -4,14 +4,47 @@ import Redirect from "../components/Redirect";
 import Submit from "../components/Submit";
 import "../styles/destination.css";
 import weather from "../resources/images/2682849_cloud_cloudy_day_forecast_sun_icon.png";
+import { ToastContainer, toast } from "react-toastify";
+import { useNavigate } from "react-router-dom";
+import "react-toastify/dist/ReactToastify.css";
 import { useFormik } from "formik/dist";
-import loginSchema from "../validations/registration";
+import loginSchema from "../validations/loginSchema";
 
 function Login() {
-  function OnSubmit({ values, actions }) {
-    setInterval(() => {
-      actions.resetForm();
-    }, 1000);
+  const navigate = useNavigate();
+  async function onSubmit() {
+    // setInterval(() => {
+    //   actions.resetForm();
+    // }, 1000);
+    try {
+      const register = await fetch("https://new-weather-app-ehzj.onrender.com/login", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          email: formik.values.email,
+          password: formik.values.password,
+        }),
+      });
+      console.log("jons");
+      const value = await register.json();
+      if (value.success == true) {
+        localStorage.setItem("data", `${value.data.token}`);
+        toast.success("Login was successful", {
+          autoClose: 5000,
+        });
+        console.log(value);
+        setTimeout(() => {
+          navigate("/dashboard");
+        }, 7000);
+      } else if (value.success == false) {
+        toast.error("An error occurred while logging into your account");
+      }
+      console.log(value);
+    } catch (e) {
+      console.log(e);
+    }
   }
 
   const formik = useFormik({
@@ -20,12 +53,13 @@ function Login() {
       password: "",
     },
     validationSchema: loginSchema,
-    OnSubmit,
+    onSubmit,
   });
   console.log(formik);
 
   return (
     <>
+      <ToastContainer />
       <div className="onboarding-heading">
         <Heading
           heading="Welcome to WeatherInfo !"
@@ -59,7 +93,7 @@ function Login() {
           errormsg={formik.errors.password}
         />
         <Submit text="Login" />
-        <Redirect text="New here? Create an account" />
+        <Redirect text="New here? Create an account" link="https://weather-frontend-beige.vercel.app/registration"/>
       </form>
     </>
   );
