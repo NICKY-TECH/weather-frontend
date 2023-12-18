@@ -31,6 +31,7 @@ function Login() {
       const value = await register.json();
       if (value.success == true) {
         localStorage.setItem("data", `${value.data.token}`);
+        localStorage.setItem("user", `${value.data.user}`);
         toast.success("Login was successful", {
           autoClose: 5000,
         });
@@ -93,7 +94,7 @@ function Login() {
           errormsg={formik.errors.password}
         />
         <Submit text="Login" />
-        <Redirect text="New here? Create an account" link="https://weather-frontend-beige.vercel.app/registration"/>
+        <Redirect text="New here? Create an account" link="/registration"/>
       </form>
     </>
   );

@@ -1,5 +1,5 @@
-function Redirect({text}) {
-  return <a className="redirect-onboarding">{text}</a>;
+function Redirect({text,link}) {
+  return <a href={link} className="redirect-onboarding">{text}</a>;
 }
 
 
