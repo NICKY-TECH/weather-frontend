@@ -12,8 +12,8 @@ import loginSchema from "../validations/loginSchema";
 
 function Login() {
   const navigate = useNavigate();
-  function onError(error,e){
-    console.log(error,e)
+  function onError(data){
+    console.log(data)
   }
   async function onSubmit() {
     // setInterval(() => {
