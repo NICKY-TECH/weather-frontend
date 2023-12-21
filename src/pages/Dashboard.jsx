@@ -118,7 +118,6 @@ function Dashboard() {
           <p className="humidity">
             Humidity:<span>{data.data.main.humidity}%</span>
           </p>
-          {console.log(data.main)}
         </div>
       </>:''
     }
