@@ -1,9 +1,6 @@
 import Auth from "./Authentication/Auth";
-import Dashboard, { DashboardLoader } from "./pages/Dashboard";
-import Login from "./pages/Login";
-import Main from "./pages/Main";
+import  { DashboardLoader } from "./pages/Dashboard";
 import { useSelector } from "react-redux";
-import Registration from "./pages/Registration";
 import "./styles/destination.css";
 import {
   createBrowserRouter,
@@ -12,36 +9,40 @@ import {
   RouterProvider,
 } from "react-router-dom";
 import Test from "./pages/Test";
+import { lazy, Suspense } from "react";
+const LazyDashboard = lazy(()=>import('./pages/Dashboard'));
+const LazyMain = lazy(()=>import('./pages/Main'));
+const LazyLogin = lazy(()=>import('./pages/Login'));
+const LazyRegistration = lazy(()=>import('./pages/Registration'));
+
 
 function App() {
-  console.log("APP");
+  console.log('APP')
   const authValue = useSelector((state) => state.auth.value);
-  console.log(authValue);
+  console.log(authValue)
   const router = createBrowserRouter(
     createRoutesFromElements(
       <Route>
-        <Route path="/" element={<Main />}>
-          <Route path="registration" element={<Registration />} />
-          <Route path="login" element={<Login />} />
+        <Route path="/" element={<Suspense><LazyMain/></Suspense>}>
+          <Route path="registration" element={<Suspense><LazyRegistration/></Suspense>} />
+          <Route path="login" element={<Suspense><LazyLogin/></Suspense>} />
         </Route>
         <Route
           path="dashboard"
-          loader={DashboardLoader}
-          element={
-            <Auth auth={authValue}>
-              <Dashboard />
-            </Auth>
-          }
+          element=
+        
+           {<Auth auth={authValue}>
+         <Suspense fallback="Loading">
+         <LazyDashboard />
+         </Suspense>
+           </Auth>} 
+                loader={DashboardLoader}
+
         />
-        <Route
-          path="test"
-          element={
-            <Auth auth={authValue}>
-              <Test />
-            </Auth>
-          }
-        />
-      </Route>
+        <Route path="test" element={<Auth auth={authValue}><Test/></Auth>}/>
+ 
+    
+    </Route>
     )
   );
   return (
