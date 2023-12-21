@@ -111,11 +111,11 @@ header button {
 }
 
 .top-info {
-  @apply flex flex-col;
+  @apply flex flex-col max-[639px]:items-center max-[639px]:space-y-5;
 }
 
 .city-icon {
-  @apply flex justify-between;
+  @apply flex max-[639px]:flex-col justify-between;
 }
 
 .city-name {

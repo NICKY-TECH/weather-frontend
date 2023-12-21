@@ -4,36 +4,43 @@ import { GiHamburgerMenu } from "react-icons/gi";
 import { FaMagnifyingGlass } from "react-icons/fa6";
 import { useState } from "react";
 import Logout from "../components/Logout";
-import clouds from "../resources/icons/cloudy-night-3.svg"
 
 function Dashboard() {
   function getCurrentDayAndTime() {
     // Create a new Date object
     const now = new Date();
-  
+
     // Get the day in full (e.g., "Monday", "Tuesday", etc.)
-    const daysOfWeek = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
+    const daysOfWeek = [
+      "Sunday",
+      "Monday",
+      "Tuesday",
+      "Wednesday",
+      "Thursday",
+      "Friday",
+      "Saturday",
+    ];
     const dayInFull = daysOfWeek[now.getDay()];
-  
+
     // Get the current time in HH:mm format
     const hours = now.getHours();
-    const minutes = now.getMinutes().toString().padStart(2, '0');
-  
+    const minutes = now.getMinutes().toString().padStart(2, "0");
+
     // Determine if it's AM or PM
-    const amOrPm = hours >= 12 ? 'PM' : 'AM';
-  
+    const amOrPm = hours >= 12 ? "PM" : "AM";
+
     // Convert 24-hour format to 12-hour format
     const formattedHours = hours % 12 || 12;
-  
+
     const time = `${formattedHours}:${minutes} ${amOrPm}`;
-  
+
     return {
       day: dayInFull,
-      time: time
+      time: time,
     };
   }
-const currentTime =getCurrentDayAndTime()  
-  const outcome = useLoaderData();
+  const currentTime = getCurrentDayAndTime();
+  const outcome = null;
   const [data, setData] = useState(outcome);
   console.log("data");
   console.log(outcome);
@@ -57,19 +64,25 @@ const currentTime =getCurrentDayAndTime()
     const newData = await response.json();
     setData(newData);
   }
-  const iconUrl = `http://openweathermap.org/img/w/${data.data.weather[0].icon}.png`;
-{console.log('weather')}
-{console.log()}
+  const iconUrl = `http://openweathermap.org/img/w/${ data? data.data.weather[0].icon :''}.png`;
+  {
+    console.log("weather");
+  }
+  {
+    console.log();
+  }
   return (
     <section>
       <header>
-      <GiHamburgerMenu className="ham"/>
-        <h1>WELCOME BACK,{localStorage.getItem('user').toUpperCase()}</h1>
+        <GiHamburgerMenu className="ham" />
+      {data?  <h1>WELCOME BACK,{localStorage.getItem("user").toUpperCase()}</h1>:''}
 
-      <Logout/>
+        <Logout />
       </header>
       <article>
-        <div className="search">
+    {
+      data?<>
+      <div className="search">
           <div className="search-box">
             <input
               type="text"
@@ -84,74 +97,35 @@ const currentTime =getCurrentDayAndTime()
           </div>
         </div>
         <div className="top-info">
-        <div className="city-icon">
-        <h3 className="city-name">{data.data.name}</h3>
-        <div className="city-icon-d "><img src={iconUrl}/>
-        <p>
-          {data.data.weather[0].main}
-        </p>
+          <div className="city-icon">
+            <h3 className="city-name">{data.data.name}</h3>
+            <div className="city-icon-d ">
+              <img src={iconUrl} />
+              <p>{data.data.weather[0].main}</p>
+            </div>
+            <p className="temp">
+              {data.data.main.temp}{" "}
+              <sup>
+                <sup>&deg;</sup>C|<sup>&deg;</sup>F
+              </sup>
+            </p>
+          </div>
+          <p>
+            {" "}
+            {currentTime.day},{currentTime.time}
+          </p>
+          <p className="humidity">
+            Humidity:<span>{data.data.main.humidity}%</span>
+          </p>
+          {console.log(data.main)}
         </div>
-        <p className="temp">{data.data.main.temp} <sup><sup>&deg;</sup>C|<sup>&deg;</sup>F</sup></p>
-        </div>
-   <p>   {currentTime.day},{currentTime.time}</p>
-   <p  className="humidity">Humidity:<span>{data.data.main.humidity
-}%</span></p>
-{console.log(data.main)}
-        </div>
+      </>:''
+    }
       </article>
     </section>
   );
 }
 
-export const DashboardLoader = async () => {
-  return new Promise((resolve, reject) => {
-    const successCallback = async (position) => {
-      console.log(position);
-      const points = {
-        lat: `${position.coords.latitude}`,
-        long: `${position.coords.longitude}`,
-      };
-      const token = localStorage.getItem("data");
-      try {
-        const response = await fetch(
-          "https://new-weather-app-ehzj.onrender.com/weather",
-          {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/json",
-              Authorization: `Bearer ${token}`,
-            },
-            body: JSON.stringify(points),
-          }
-        );
-        const value = await response.json();
-        if (value.success == true) {
-          resolve(value);
-        } else if (value.success == false) {
-          reject({
-            success: false,
-            message: "An error occurred while  retrieving",
-            data: {},
-          });
-        }
-      } catch (e) {
-        console.log(e);
-      }
-    };
 
-    const errorCallback = (error) => {
-      reject({
-        success: false,
-        message: "Ensure your device location is turned on",
-        data: error,
-      });
-    };
-    if (navigator.geolocation) {
-      navigator.geolocation.getCurrentPosition(successCallback, errorCallback);
-    } else {
-      console.log("Geolocation is not supported by this browser.");
-    }
-  });
-};
 
 export default Dashboard;

@@ -665,6 +665,10 @@ video {
   --tw-bg-opacity: 1;
   background-color: rgb(255 255 240 / var(--tw-bg-opacity));
 }
+.bg-black {
+  --tw-bg-opacity: 1;
+  background-color: rgb(0 0 0 / var(--tw-bg-opacity));
+}
 .bg-blue-400 {
   --tw-bg-opacity: 1;
   background-color: rgb(96 165 250 / var(--tw-bg-opacity));
@@ -1106,9 +1110,29 @@ header button {
   flex-direction: column;
 }
 
+@media (max-width: 639px) {
+
+  .top-info {
+    align-items: center;
+  }
+
+  .top-info > :not([hidden]) ~ :not([hidden]) {
+    --tw-space-y-reverse: 0;
+    margin-top: calc(1.25rem * calc(1 - var(--tw-space-y-reverse)));
+    margin-bottom: calc(1.25rem * var(--tw-space-y-reverse));
+  }
+}
+
 .city-icon {
   display: flex;
   justify-content: space-between;
+}
+
+@media (max-width: 639px) {
+
+  .city-icon {
+    flex-direction: column;
+  }
 }
 
 .city-name {
@@ -1218,6 +1242,14 @@ header button {
   .max-\[639px\]\:min-w-min {
     min-width: -moz-min-content;
     min-width: min-content;
+  }
+
+  .max-\[639px\]\:flex-col {
+    flex-direction: column;
+  }
+
+  .max-\[639px\]\:items-center {
+    align-items: center;
   }
 
   .max-\[639px\]\:text-\[1\.3rem\] {
