@@ -4,7 +4,7 @@ import Redirect from "../components/Redirect";
 import Submit from "../components/Submit";
 import "../styles/destination.css";
 import weather from "../resources/images/2682849_cloud_cloudy_day_forecast_sun_icon.png";
-import { useFormik } from "formik/dist";
+import { useFormik } from "formik";
 import { useNavigate } from "react-router-dom";
 import regSchema from "../validations/registration";
 import { ToastContainer, toast } from "react-toastify";
