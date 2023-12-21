@@ -66,7 +66,7 @@ function Login() {
         />
         <img src={weather} style={{ width: "50px", height: "50px" }} />
       </div>
-      <form autoComplete="off" onSubmit={formik.handleSubmit}>
+      <form autoComplete="off" onSubmit={submit}>
         <Input
           type="email"
           label="Email"
