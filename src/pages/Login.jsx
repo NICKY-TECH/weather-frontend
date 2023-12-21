@@ -7,7 +7,9 @@ import weather from "../resources/images/2682849_cloud_cloudy_day_forecast_sun_i
 import { ToastContainer, toast } from "react-toastify";
 import { useNavigate,Navigate } from "react-router-dom";
 import "react-toastify/dist/ReactToastify.css";
-import { useFormik } from "formik/dist";
+
+import { useFormik } from 'formik';
+ 
 import loginSchema from "../validations/loginSchema";
 
 function Login() {
@@ -53,8 +55,9 @@ function Login() {
     },
     validationSchema: loginSchema,
     onSubmit,
+    
   });
-  console.log(formik);
+
 
   return (
     <>
