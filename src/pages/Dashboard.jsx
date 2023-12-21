@@ -40,7 +40,7 @@ function Dashboard() {
     };
   }
   const currentTime = getCurrentDayAndTime();
-  const outcome = null;
+  const outcome = useLoaderData();
   const [data, setData] = useState(outcome);
   console.log("data");
   console.log(outcome);
@@ -126,6 +126,59 @@ function Dashboard() {
   );
 }
 
+export const DashboardLoader = async () => {
+  const auth =localStorage.getItem('data')
+if(auth){
+  return new Promise((resolve, reject) => {
+    const successCallback = async (position) => {
+      console.log(position);
+      const points = {
+        lat: `${position.coords.latitude}`,
+        long: `${position.coords.longitude}`,
+      };
+      const token = localStorage.getItem("data");
+      try {
+        const response = await fetch(
+          "https://new-weather-app-ehzj.onrender.com/weather",
+          {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+              Authorization: `Bearer ${token}`,
+            },
+            body: JSON.stringify(points),
+          }
+        );
+        const value = await response.json();
+        if (value.success == true) {
+          resolve(value);
+        } else if (value.success == false) {
+          reject({
+            success: false,
+            message: "An error occurred while  retrieving",
+            data: {},
+          });
+        }
+      } catch (e) {
+        console.log(e);
+      }
+    };
 
+    const errorCallback = (error) => {
+      reject({
+        success: false,
+        message: "Ensure your device location is turned on",
+        data: error,
+      });
+    };
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(successCallback, errorCallback);
+    } else {
+      console.log("Geolocation is not supported by this browser.");
+    }
+  });
+}
+return null
+};
 
 export default Dashboard;

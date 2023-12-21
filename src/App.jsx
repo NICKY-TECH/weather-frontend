@@ -1,5 +1,5 @@
 import Auth from "./Authentication/Auth";
-import Dashboard from "./pages/Dashboard";
+import Dashboard, { DashboardLoader } from "./pages/Dashboard";
 import Login from "./pages/Login";
 import Main from "./pages/Main";
 import { useSelector } from "react-redux";
@@ -13,11 +13,10 @@ import {
 } from "react-router-dom";
 import Test from "./pages/Test";
 
-
 function App() {
-  console.log('APP')
+  console.log("APP");
   const authValue = useSelector((state) => state.auth.value);
-  console.log(authValue)
+  console.log(authValue);
   const router = createBrowserRouter(
     createRoutesFromElements(
       <Route>
@@ -27,18 +26,22 @@ function App() {
         </Route>
         <Route
           path="dashboard"
-   
-          element=
-        
-           {<Auth auth={authValue}>
-            <Dashboard />
-           </Auth>} 
-
+          loader={DashboardLoader}
+          element={
+            <Auth auth={authValue}>
+              <Dashboard />
+            </Auth>
+          }
         />
-        <Route path="test" element={<Auth auth={authValue}><Test/></Auth>}/>
- 
-    
-    </Route>
+        <Route
+          path="test"
+          element={
+            <Auth auth={authValue}>
+              <Test />
+            </Auth>
+          }
+        />
+      </Route>
     )
   );
   return (
