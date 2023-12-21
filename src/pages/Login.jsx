@@ -12,7 +12,7 @@ import loginSchema from "../validations/loginSchema";
 
 function Login() {
   const navigate = useNavigate();
-  async function onSubmit() {
+  async function submit() {
     // setInterval(() => {
     //   actions.resetForm();
     // }, 1000);
@@ -52,7 +52,7 @@ function Login() {
       password: "",
     },
     validationSchema: loginSchema,
-    onSubmit,
+    onSubmit:submit
   });
   console.log(formik);
 
