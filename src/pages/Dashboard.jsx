@@ -3,6 +3,7 @@ import "../styles/destination.css";
 import { GiHamburgerMenu } from "react-icons/gi";
 import { FaMagnifyingGlass } from "react-icons/fa6";
 import { useState } from "react";
+import { useSelector } from "react-redux";
 import Logout from "../components/Logout";
 
 function Dashboard() {
@@ -64,7 +65,7 @@ function Dashboard() {
     const newData = await response.json();
     setData(newData);
   }
-  const iconUrl = `http://openweathermap.org/img/w/${ data? data.data.weather[0].icon :''}.png`;
+  const iconUrl = `https://openweathermap.org/img/w/${ data? data.data.weather[0].icon :''}.png`;
   {
     console.log("weather");
   }
@@ -127,7 +128,7 @@ function Dashboard() {
 }
 
 export const DashboardLoader = async () => {
-  const auth =localStorage.getItem('data')
+  const auth = useSelector((state) => state.auth.value);
 if(auth){
   return new Promise((resolve, reject) => {
     const successCallback = async (position) => {

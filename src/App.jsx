@@ -19,6 +19,7 @@ const LazyRegistration = lazy(()=>import('./pages/Registration'));
 function App() {
   console.log('APP')
   const authValue = useSelector((state) => state.auth.value);
+  console.log('appp within')
   console.log(authValue)
   const router = createBrowserRouter(
     createRoutesFromElements(

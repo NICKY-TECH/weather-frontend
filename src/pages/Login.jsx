@@ -37,13 +37,12 @@ function Login() {
       if (value.success == true) {
         localStorage.setItem("data", `${value.data.token}`);
         localStorage.setItem("user", `${value.data.user}`);
-        dispatch(changeAuth());
+        await dispatch(changeAuth());
         toast.success("Login was successful", {
           autoClose: 2000,
         });
         console.log("before navigation to dashboard");
         return navigate("/dashboard");
-        console.log("after navigation to dashboard");
       } else if (value.success == false) {
         toast.error("An error occurred while logging into your account");
       }
