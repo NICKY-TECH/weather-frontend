@@ -3,7 +3,6 @@ import "../styles/destination.css";
 import { GiHamburgerMenu } from "react-icons/gi";
 import { FaMagnifyingGlass } from "react-icons/fa6";
 import { useState } from "react";
-import { useSelector } from "react-redux";
 import Logout from "../components/Logout";
 
 function Dashboard() {
@@ -118,6 +117,7 @@ function Dashboard() {
           <p className="humidity">
             Humidity:<span>{data.data.main.humidity}%</span>
           </p>
+          {console.log(data.main)}
         </div>
       </>:''
     }
@@ -127,7 +127,7 @@ function Dashboard() {
 }
 
 export const DashboardLoader = async () => {
-  const auth = useSelector((state) => state.auth.value);
+  const auth =localStorage.getItem('data')
 if(auth){
   return new Promise((resolve, reject) => {
     const successCallback = async (position) => {
