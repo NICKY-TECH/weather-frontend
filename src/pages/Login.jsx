@@ -12,7 +12,10 @@ import loginSchema from "../validations/loginSchema";
 
 function Login() {
   const navigate = useNavigate();
-  async function submit() {
+  function onError(error,e){
+    console.log(error,e)
+  }
+  async function onSubmit() {
     // setInterval(() => {
     //   actions.resetForm();
     // }, 1000);
@@ -52,7 +55,7 @@ function Login() {
       password: "",
     },
     validationSchema: loginSchema,
-    onSubmit:submit
+    onSubmit,
   });
   console.log(formik);
 
@@ -66,7 +69,7 @@ function Login() {
         />
         <img src={weather} style={{ width: "50px", height: "50px" }} />
       </div>
-      <form autoComplete="off" onSubmit={submit}>
+      <form autoComplete="off" onSubmit={formik.handleSubmit(onSubmit,onError)}>
         <Input
           type="email"
           label="Email"
