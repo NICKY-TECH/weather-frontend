@@ -90,7 +90,7 @@ console.log(navigate.state)
         navigate.state == "loading"? <div>Loading................</div>:""
       }
     {
-      navigate.state!="idle" &&data?<>
+      navigate.state!="loading" &&data?<>
       <div className="search">
           <div className="search-box">
             <input

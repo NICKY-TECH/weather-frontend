@@ -5,17 +5,11 @@ import Submit from "../components/Submit";
 import "../styles/destination.css";
 import weather from "../resources/images/2682849_cloud_cloudy_day_forecast_sun_icon.png";
 import { ToastContainer, toast } from "react-toastify";
-import { useNavigate,Navigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import "react-toastify/dist/ReactToastify.css";
-import { useDispatch } from "react-redux";
-import { changeAuth } from "../feature/auth";
-
-import { useFormik } from 'formik';
- 
+import { useFormik } from "formik/dist";
 import loginSchema from "../validations/loginSchema";
-
 function Login() {
-  const dispatch = useDispatch();
   const navigate = useNavigate();
   async function onSubmit() {
     // setInterval(() => {
@@ -38,11 +32,12 @@ function Login() {
         localStorage.setItem("data", `${value.data.token}`);
         localStorage.setItem("user", `${value.data.user}`);
         toast.success("Login was successful", {
-          autoClose: 2000,
+          autoClose: 5000,
         });
-        dispatch(changeAuth());
-        navigate('/dashboard')
-      
+        console.log(value);
+        setTimeout(() => {
+          navigate("/dashboard");
+        }, 7000);
       } else if (value.success == false) {
         toast.error("An error occurred while logging into your account");
       }
@@ -51,7 +46,6 @@ function Login() {
       console.log(e);
     }
   }
-
   const formik = useFormik({
     initialValues: {
       email: "",
@@ -59,10 +53,8 @@ function Login() {
     },
     validationSchema: loginSchema,
     onSubmit,
-    
   });
-
-
+  console.log(formik);
   return (
     <>
       <ToastContainer />

@@ -8,7 +8,7 @@ html {
 }
 
 main {
-  @apply max-[639px]:min-h-min max-[639px]:min-w-min  sm:h-full lg:h-full sm:w-full  flex justify-center items-center flex-col space-y-4 pb-3 bg-red-200;
+  @apply max-[639px]:min-h-min max-[639px]:min-h-screen  sm:min-h-screen lg:h-screen sm:w-full  flex  items-center flex-col space-y-4 pb-3 bg-red-200;
 }
 
 section {
@@ -16,7 +16,7 @@ section {
 }
 
 article {
-  @apply h-[80%] flex flex-col;
+  @apply h-[90%] flex flex-col;
 }
 
 .app-wrapper {
@@ -111,7 +111,7 @@ header button {
 }
 
 .top-info {
-  @apply flex flex-col max-[639px]:items-center max-[639px]:space-y-5;
+  @apply flex flex-col max-[639px]:items-center max-[639px]:space-y-5 sm:space-y-6 mt-5;
 }
 
 .city-icon {
