@@ -1,11 +1,15 @@
-import { useLoaderData } from "react-router-dom";
+import { defer, useLoaderData, useNavigation } from "react-router-dom";
 import "../styles/destination.css";
 import { GiHamburgerMenu } from "react-icons/gi";
 import { FaMagnifyingGlass } from "react-icons/fa6";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Logout from "../components/Logout";
 
 function Dashboard() {
+  const navigate = useNavigation();
+  useEffect(()=>{
+
+  },[navigate.state])
   function getCurrentDayAndTime() {
     // Create a new Date object
     const now = new Date();
@@ -64,15 +68,17 @@ function Dashboard() {
     const newData = await response.json();
     setData(newData);
   }
-  const iconUrl = `https://openweathermap.org/img/w/${ data? data.data.weather[0].icon :''}.png`;
+  const iconUrl = `http://openweathermap.org/img/w/${ data? data.data.weather[0].icon :''}.png`;
   {
     console.log("weather");
   }
   {
     console.log();
   }
+console.log('navigate properties')
+console.log(navigate.state)
   return (
-    <section>
+    <>
       <header>
         <GiHamburgerMenu className="ham" />
       {data?  <h1>WELCOME BACK,{localStorage.getItem("user").toUpperCase()}</h1>:''}
@@ -80,8 +86,11 @@ function Dashboard() {
         <Logout />
       </header>
       <article>
+      {
+        navigate.state == "loading"? <div>Loading................</div>:""
+      }
     {
-      data?<>
+      navigate.state!="idle" &&data?<>
       <div className="search">
           <div className="search-box">
             <input
@@ -117,68 +126,68 @@ function Dashboard() {
           <p className="humidity">
             Humidity:<span>{data.data.main.humidity}%</span>
           </p>
-          {console.log(data.main)}
         </div>
       </>:''
     }
       </article>
-    </section>
+    </>
   );
 }
 
 export const DashboardLoader = async () => {
   const auth =localStorage.getItem('data')
 if(auth){
-  return new Promise((resolve, reject) => {
-    const successCallback = async (position) => {
-      console.log(position);
-      const points = {
-        lat: `${position.coords.latitude}`,
-        long: `${position.coords.longitude}`,
-      };
-      const token = localStorage.getItem("data");
-      try {
-        const response = await fetch(
-          "https://new-weather-app-ehzj.onrender.com/weather",
-          {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/json",
-              Authorization: `Bearer ${token}`,
-            },
-            body: JSON.stringify(points),
+  return (
+    new Promise((resolve, reject) => {
+      const successCallback = async (position) => {
+        console.log(position);
+        const points = {
+          lat: `${position.coords.latitude}`,
+          long: `${position.coords.longitude}`,
+        };
+        const token = localStorage.getItem("data");
+        try {
+          const response = await fetch(
+            "https://new-weather-app-ehzj.onrender.com/weather",
+            {
+              method: "POST",
+              headers: {
+                "Content-Type": "application/json",
+                Authorization: `Bearer ${token}`,
+              },
+              body: JSON.stringify(points),
+            }
+          );
+          const value = await response.json();
+          if (value.success == true) {
+            resolve(value);
+          } else if (value.success == false) {
+            reject({
+              success: false,
+              message: "An error occurred while  retrieving",
+              data: {},
+            });
           }
-        );
-        const value = await response.json();
-        if (value.success == true) {
-          resolve(value);
-        } else if (value.success == false) {
-          reject({
-            success: false,
-            message: "An error occurred while  retrieving",
-            data: {},
-          });
+        } catch (e) {
+          console.log(e);
         }
-      } catch (e) {
-        console.log(e);
+      };
+  
+      const errorCallback = (error) => {
+        reject({
+          success: false,
+          message: "Ensure your device location is turned on",
+          data: error,
+        });
+      };
+      if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(successCallback, errorCallback);
+      } else {
+        console.log("Geolocation is not supported by this browser.");
       }
-    };
-
-    const errorCallback = (error) => {
-      reject({
-        success: false,
-        message: "Ensure your device location is turned on",
-        data: error,
-      });
-    };
-    if (navigator.geolocation) {
-      navigator.geolocation.getCurrentPosition(successCallback, errorCallback);
-    } else {
-      console.log("Geolocation is not supported by this browser.");
-    }
-  });
+    })
+  )
 }
-return null
 };
 
 export default Dashboard;

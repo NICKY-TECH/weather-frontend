@@ -1,5 +1,4 @@
 import Auth from "./Authentication/Auth";
-import  { DashboardLoader } from "./pages/Dashboard";
 import { useSelector } from "react-redux";
 import "./styles/destination.css";
 import {
@@ -10,6 +9,7 @@ import {
 } from "react-router-dom";
 import Test from "./pages/Test";
 import { lazy, Suspense } from "react";
+import { DashboardLoader } from "./pages/Dashboard";
 const LazyDashboard = lazy(()=>import('./pages/Dashboard'));
 const LazyMain = lazy(()=>import('./pages/Main'));
 const LazyLogin = lazy(()=>import('./pages/Login'));
@@ -19,17 +19,15 @@ const LazyRegistration = lazy(()=>import('./pages/Registration'));
 function App() {
   console.log('APP')
   const authValue = useSelector((state) => state.auth.value);
-  console.log('appp within')
   console.log(authValue)
   const router = createBrowserRouter(
     createRoutesFromElements(
-      <Route>
         <Route path="/" element={<Suspense><LazyMain/></Suspense>}>
           <Route path="registration" element={<Suspense><LazyRegistration/></Suspense>} />
           <Route path="login" element={<Suspense><LazyLogin/></Suspense>} />
-        </Route>
         <Route
           path="dashboard"
+          loader={DashboardLoader}
           element=
         
            {<Auth auth={authValue}>
@@ -37,13 +35,14 @@ function App() {
          <LazyDashboard />
          </Suspense>
            </Auth>} 
-                loader={DashboardLoader}
-
+          
         />
-        <Route path="test" element={<Auth auth={authValue}><Test/></Auth>}/>
+                <Route path="test" element={<Auth auth={authValue}><Test/></Auth>}/>
+                </Route>
+
  
     
-    </Route>
+
     )
   );
   return (

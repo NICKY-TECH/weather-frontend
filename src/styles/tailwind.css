@@ -8,11 +8,11 @@ html {
 }
 
 main {
-  @apply max-[639px]:min-h-min max-[639px]:min-w-min  sm:h-full lg:h-screen sm:w-full  flex justify-center items-center flex-col space-y-4 pb-3 bg-red-200;
+  @apply max-[639px]:min-h-min max-[639px]:min-w-min  sm:h-full lg:h-full sm:w-full  flex justify-center items-center flex-col space-y-4 pb-3 bg-red-200;
 }
 
 section {
-  @apply flex flex-col items-center max-[639px]:min-h-min max-[639px]:min-w-min bg-red-200 h-screen space-y-10;
+  @apply flex flex-col items-center max-[639px]:min-h-min max-[639px]:min-w-min bg-red-200 h-full space-y-10 w-screen;
 }
 
 article {
