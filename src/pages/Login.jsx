@@ -15,9 +15,6 @@ function Login() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   async function onSubmit() {
-    // setInterval(() => {
-    //   actions.resetForm();
-    // }, 1000);
     try {
       const register = await fetch(
         "https://new-weather-app-ehzj.onrender.com/login",
