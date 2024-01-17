@@ -7,7 +7,7 @@ import weather from "../resources/images/2682849_cloud_cloudy_day_forecast_sun_i
 import { ToastContainer, toast } from "react-toastify";
 import { useDispatch } from "react-redux";
 import { changeAuth } from "../feature/auth";
-import { useNavigate } from "react-router-dom";
+import { redirect, useNavigate } from "react-router-dom";
 import "react-toastify/dist/ReactToastify.css";
 import { useFormik } from "formik/dist";
 import loginSchema from "../validations/loginSchema";
@@ -39,7 +39,7 @@ function Login() {
           autoClose: 4000,
         });
         console.log(value);
-     return navigate("/dashboard");
+     return redirect("/dashboard");
       } else if (value.success == false) {
         toast.error("An error occurred while logging into your account");
       }

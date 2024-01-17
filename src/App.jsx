@@ -17,13 +17,14 @@ const LazyDashboard = lazy(()=>import('./pages/Dashboard'));
 const LazyMain = lazy(()=>import('./pages/Main'));
 const LazyLogin = lazy(()=>import('./pages/Login'));
 const LazyRegistration = lazy(()=>import('./pages/Registration'));
+import ErrorHandler from './pages/Error';
 
 
 function App() {
   console.log('APP')
   const router = createBrowserRouter(
     createRoutesFromElements(
-        <Route path="/" element={<Main/>}>
+        <Route path="/" element={<Main/>} errorElement={<ErrorHandler/>}>
           <Route path="registration" element={<Registration/>} />
           <Route path="login" element={<Login/>} />
         <Route
