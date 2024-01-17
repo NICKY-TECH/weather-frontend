@@ -8,7 +8,7 @@ function Logout() {
   function goTo() {
     localStorage.removeItem("data");
     localStorage.removeItem("user");
-    dispatch(changeAuth());
+    dispatch(changeAuth(localStorage.getItem('data')));
     navigate("/login");
   }
   return <button onClick={goTo}>LOGOUT</button>;

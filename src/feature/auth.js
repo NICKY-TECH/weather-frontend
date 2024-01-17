@@ -4,8 +4,8 @@ const authSlice= createSlice({
     name:'auth',
     initialState:{value:localStorage.getItem('data')},
     reducers:{
-        changeAuth:(state)=>{
-state.value = localStorage.getItem('data')
+        changeAuth:(state,action)=>{
+state.value = action.payload
         }
     }
     

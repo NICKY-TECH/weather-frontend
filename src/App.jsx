@@ -1,5 +1,4 @@
 import Auth from "./Authentication/Auth";
-import  { DashboardLoader } from "./pages/Dashboard";
 import { useSelector } from "react-redux";
 import "./styles/destination.css";
 import {
@@ -9,35 +8,35 @@ import {
   RouterProvider,
 } from "react-router-dom";
 import Test from "./pages/Test";
-import { lazy, Suspense } from "react";
+import { lazy, Suspense, useEffect } from "react";
+import Dashboard, { DashboardLoader } from "./pages/Dashboard";
+import Login from "./pages/Login";
+import Registration from "./pages/Registration";
+import Main from "./pages/Main";
 const LazyDashboard = lazy(()=>import('./pages/Dashboard'));
 const LazyMain = lazy(()=>import('./pages/Main'));
 const LazyLogin = lazy(()=>import('./pages/Login'));
 const LazyRegistration = lazy(()=>import('./pages/Registration'));
+
+
 function App() {
   console.log('APP')
-  const authValue = useSelector((state) => state.auth.value);
-  console.log(authValue)
   const router = createBrowserRouter(
     createRoutesFromElements(
-        <Route path="/" element={<Suspense><LazyMain/></Suspense>}>
-          <Route path="registration" element={<Suspense><LazyRegistration/></Suspense>} />
-          <Route path="login" element={<Suspense><LazyLogin/></Suspense>} />
+        <Route path="/" element={<Main/>}>
+          <Route path="registration" element={<Registration/>} />
+          <Route path="login" element={<Login/>} />
         <Route
           path="dashboard"
-          element=
-        
-           {<Auth auth={authValue}>
-         <Suspense fallback="Loading">
-         <LazyDashboard />
-         </Suspense>
-           </Auth>} 
-                loader={DashboardLoader}
-        />
-        <Route path="test" element={<Auth auth={authValue}><Test/></Auth>}/>
+          loader={DashboardLoader}
+          element={<Dashboard/>}
+               />
+                <Route path="test" element={<Auth auth={ useSelector((state) => state.auth.value)}><Test/></Auth>}/>
+                </Route>
+
  
     
-    </Route>
+
     )
   );
   return (
@@ -46,4 +45,5 @@ function App() {
     </div>
   );
 }
+
 export default App;
