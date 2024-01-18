@@ -4,6 +4,7 @@ import Redirect from "../components/Redirect";
 import Submit from "../components/Submit";
 import "../styles/destination.css";
 import weather from "../resources/images/2682849_cloud_cloudy_day_forecast_sun_icon.png";
+import { useEffect } from "react";
 import { ToastContainer, toast } from "react-toastify";
 import { useDispatch } from "react-redux";
 import { changeAuth } from "../feature/auth";
@@ -39,7 +40,6 @@ function Login() {
           autoClose: 4000,
         });
         console.log(value);
-     navigate("/dashboard");
       } else if (value.success == false) {
         toast.error("An error occurred while logging into your account");
       }
@@ -48,6 +48,11 @@ function Login() {
       console.log(e);
     }
   }
+  useEffect(() => {
+    if (localStorage.getItem('data')) {
+      navigate("/dashboard");
+    }
+  }, [navigate]);
   const formik = useFormik({
     initialValues: {
       email: "",
