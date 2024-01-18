@@ -6,7 +6,7 @@ import { useEffect } from "react";
 function Main() {
   const navigate = useNavigate()
   useEffect(() => {
-    navigate('/login');
+    navigate('/login',{replace:true});
   }, [navigate]);
   return (
     <main>
