@@ -1,7 +1,13 @@
 import { Outlet } from "react-router-dom";
 import "../styles/destination.css";
+import { useNavigate } from "react-router-dom";
+import { useEffect } from "react";
 
 function Main() {
+  const navigate = useNavigate()
+  useEffect(() => {
+    navigate('/login');
+  }, [navigate]);
   return (
     <main>
 <Outlet/>
