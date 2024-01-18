@@ -9,7 +9,7 @@ import { useDispatch } from "react-redux";
 import { changeAuth } from "../feature/auth";
 import { redirect, useNavigate } from "react-router-dom";
 import "react-toastify/dist/ReactToastify.css";
-import { useFormik } from "formik/dist";
+import { useFormik } from "formik";
 import loginSchema from "../validations/loginSchema";
 function Login() {
   const navigate = useNavigate();
