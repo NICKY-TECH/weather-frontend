@@ -94,7 +94,7 @@ article {
 }
 
 header {
-  @apply bg-[#fffff0] flex justify-around w-full py-2;
+  @apply bg-[#fffff0] flex justify-around items-center w-full py-2;
 }
 
 header h1 {
