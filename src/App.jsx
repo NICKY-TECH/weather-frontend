@@ -34,7 +34,7 @@ function App() {
           loader={DashboardLoader}
           element={<Dashboard/>}
                />
-                <Route path="test" element={<Auth auth={ useSelector((state) => state.auth.value)}><Test/></Auth>}/>
+                {/* <Route path="test" element={<Auth auth={ useSelector((state) => state.auth.value)}><Test/></Auth>}/> */}
                 </Route>
 
  
