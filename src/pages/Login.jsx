@@ -39,7 +39,7 @@ function Login() {
           autoClose: 4000,
         });
         console.log(value);
-     return navigate("/dashboard");
+     navigate("/dashboard");
       } else if (value.success == false) {
         toast.error("An error occurred while logging into your account");
       }
