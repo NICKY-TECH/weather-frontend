@@ -1103,13 +1103,6 @@ header button {
   color: rgb(255 255 255 / var(--tw-text-opacity));
 }
 
-@media (max-width: 639px) {
-
-  header button {
-    display: none;
-  }
-}
-
 @media (min-width: 640px) {
 
   header button {
@@ -1251,10 +1244,6 @@ header button {
 }
 
 @media (max-width: 639px) {
-
-  .max-\[639px\]\:hidden {
-    display: none;
-  }
 
   .max-\[639px\]\:min-h-min {
     min-height: -moz-min-content;

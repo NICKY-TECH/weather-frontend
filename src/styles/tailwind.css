@@ -103,7 +103,7 @@ header h1 {
 
 header button {
   @apply bg-red-300 text-white font-semibold rounded-lg
-  p-4 max-[639px]:hidden sm:flex;
+  p-4 sm:flex;
 }
 
 .ham {
