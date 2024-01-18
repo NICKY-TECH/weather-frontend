@@ -92,9 +92,7 @@ function Dashboard() {
         <Logout />
       </header>
       <article>
-        {data ? (
-          <>
-            <div className="search">
+      <div className="search">
               <div className="search-box">
                 <input
                   type="text"
@@ -108,6 +106,8 @@ function Dashboard() {
                 <FaMagnifyingGlass />
               </div>
             </div>
+        {data ? (
+          <>
             <div className="top-info">
               <div className="city-icon">
                 <h3 className="city-name">{data.data.name}</h3>
@@ -132,7 +132,7 @@ function Dashboard() {
             </div>
           </>
         ) : (
-          <Suspense fallback={<h1>Loading</h1>}>
+          <Suspense fallback={<h1 className="text-center mt-3 font-bold">Loading</h1>}>
             <Await resolve={outcome.data}>
               {(data) => {
                 const iconUrl = `http://openweathermap.org/img/w/${
@@ -140,7 +140,7 @@ function Dashboard() {
                 }.png`;
                 return (
                   <>
-                    <div className="search">
+                    {/* <div className="search">
                       <div className="search-box">
                         <input
                           type="text"
@@ -153,7 +153,7 @@ function Dashboard() {
                       <div className="magnifying-glass" onClick={getInfo}>
                         <FaMagnifyingGlass />
                       </div>
-                    </div>
+                    </div> */}
                     <div className="top-info">
                       <div className="city-icon">
                         <h3 className="city-name">{data.data.name}</h3>
