@@ -9,7 +9,7 @@ function Logout() {
     localStorage.removeItem("data");
     localStorage.removeItem("user");
     dispatch(changeAuth(localStorage.getItem('data')));
-    navigate("/");
+    navigate("/login");
   }
   return <button onClick={goTo}>LOGOUT</button>;
 }

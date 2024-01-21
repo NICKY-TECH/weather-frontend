@@ -189,7 +189,7 @@ function Dashboard() {
 
 export const DashboardLoader = async () => {
   const auth = localStorage.getItem("data");
-  if (!auth) throw redirect("/");
+  if (!auth) throw redirect("/login");
   return defer({
     data: new Promise((resolve, reject) => {
       const successCallback = async (position) => {

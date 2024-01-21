@@ -28,7 +28,7 @@ function App() {
         <Route path="/" element={<Main/>} errorElement={<ErrorHandler/>}>
         {/* <Route index element={<Navigate to="/login"/>} replace/> */}
           <Route path="registration" element={<Registration/>} />
-          <Route index  exact element={<Login/>} />
+          <Route path="login" element={<Login/>} />
         <Route
           path="dashboard"
           loader={DashboardLoader}
