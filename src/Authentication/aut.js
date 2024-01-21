@@ -12,7 +12,7 @@ const Auth = () => {
   useEffect(() => {
     if (auth === null) {
       // User is not authenticated, redirect to /login
-      navigate("/login", { state: { from: location }, replace: true });
+      navigate("/", { state: { from: location }, replace: true });
     }
   }, [auth]);
 
