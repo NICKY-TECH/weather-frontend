@@ -123,7 +123,7 @@ function Registration() {
           errormsg={formik.errors.confirmpassword}
         />
         <Submit text="Create account" />
-        <Redirect text="Already have an account? Signin" link="login"/>
+        <Redirect text="Already have an account? Signin" link="/"/>
       </form>
     </>
   );

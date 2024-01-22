@@ -6,15 +6,15 @@ import "../styles/destination.css";
 import weather from "../resources/images/2682849_cloud_cloudy_day_forecast_sun_icon.png";
 import { useEffect } from "react";
 import { ToastContainer, toast } from "react-toastify";
-import { useDispatch } from "react-redux";
-import { changeAuth } from "../feature/auth";
+// import { useDispatch } from "react-redux";
+// import { changeAuth } from "../feature/auth";
 import { redirect, useNavigate } from "react-router-dom";
 import "react-toastify/dist/ReactToastify.css";
 import { useFormik } from "formik";
 import loginSchema from "../validations/loginSchema";
 function Login() {
   const navigate = useNavigate();
-  const dispatch = useDispatch();
+  // const dispatch = useDispatch();
   async function onSubmit() {
     try {
       const register = await fetch(
@@ -33,11 +33,10 @@ function Login() {
       console.log("jons");
       const value = await register.json();
       if (value.success == true) {
-       localStorage.setItem("data", `${value.data.token}`);
+        localStorage.setItem("data", `${value.data.token}`);
         localStorage.setItem("user", `${value.data.user}`);
-       dispatch(changeAuth(localStorage.getItem('data')))
         toast.success("Login was successful", {
-          autoClose: 4000,
+          autoClose: 1000,
         });
         console.log(value);
       } else if (value.success == false) {
@@ -48,11 +47,19 @@ function Login() {
       console.log(e);
     }
   }
+  console.log("before useeffect")
   useEffect(() => {
-    if (localStorage.getItem('data')) {
-      navigate("/dashboard");
+    const authValue = localStorage.getItem('data');
+    console.log("authValue before if statement")
+    console.log(authValue)
+    if (authValue !== null && authValue !== undefined) {
+      console.log("auth exist")
+         navigate("/dashboard");
+ 
+    }else{
+            console.log("e no dey")
     }
-  }, [navigate]);
+  }, [localStorage.getItem('data')]);
   const formik = useFormik({
     initialValues: {
       email: "",

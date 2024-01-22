@@ -12,7 +12,7 @@ const Auth = ({auth,children}) => {
 if(!auth){
   console.log('does not contain auth')
   console.log(auth)
-  return <Navigate to="/login"/>
+  return <Navigate to="/"/>
 }
 console.log('passed')
 return children

@@ -6,7 +6,6 @@ import {
   useNavigation,
 } from "react-router-dom";
 import "../styles/destination.css";
-import { GiHamburgerMenu } from "react-icons/gi";
 import { FaMagnifyingGlass } from "react-icons/fa6";
 import { Suspense, useEffect, useState } from "react";
 import Logout from "../components/Logout";
@@ -56,6 +55,7 @@ function Dashboard() {
   console.log("data");
   console.log(outcome);
   async function getInfo() {
+   try {
     const cityValue = document.getElementById("city").value;
     const token = localStorage.getItem("data");
     const response = await fetch(
@@ -74,12 +74,15 @@ function Dashboard() {
     console.log("city");
     const newData = await response.json();
     setData(newData);
+  }catch(e){
+    console.log(e)
   }
   {
     console.log("weather");
   }
   {
     console.log();
+   }
   }
   console.log("navigate properties");
   console.log(navigate.state);
@@ -133,7 +136,7 @@ function Dashboard() {
           </>
         ) : (
           <Suspense fallback={<h1 className="text-center mt-3 font-bold">Loading</h1>}>
-            <Await resolve={outcome.data}>
+            <Await resolve={outcome.data}  errorElement={<h1>{console.log("hello")}</h1>}>
               {(data) => {
                 const iconUrl = `http://openweathermap.org/img/w/${
                   data ? data.data.weather[0].icon : ""

@@ -8,7 +8,7 @@ import {
   Route,
   RouterProvider,
 } from "react-router-dom";
-import Test from "./pages/Test";
+// import Test from "./pages/Test";
 import { lazy, Suspense, useEffect } from "react";
 import Dashboard, { DashboardLoader } from "./pages/Dashboard";
 import Login from "./pages/Login";
@@ -27,13 +27,13 @@ function App() {
     createRoutesFromElements(
         <Route path="/" element={<Main/>}>
           <Route path="registration" element={<Registration/>} />
-          <Route path="login" element={<Login/>} />
+          <Route exact index element={<Login/>} />
         <Route
           path="dashboard"
-          loader={DashboardLoader}
           element={<Dashboard/>}
+          loader={DashboardLoader}
                />
-                <Route path="test" element={<Auth auth={ useSelector((state) => state.auth.value)}><Test/></Auth>}/>
+               <Route/>
                 </Route>
 
  
