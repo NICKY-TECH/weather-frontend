@@ -18,4 +18,4 @@
 ### REACT CONCEPTS LEARNT DURING DEVELOPMENT WORKFLOW
 1. I learnt about loaders in react and its issues.
 * Below are some materials that can help you better understand loaders in react.
-- [Routing made easy with React-Router 'loader' function.(https://www.linkedin.com/pulse/routing-made-easy-react-router-loader-function-sreejit-sengupta#:~:text=A%20loader%20in%20react%2Drouter,the%20route%20before%20it%20renders.)]
+- [Routing made easy with React-Router 'loader' function.](https://www.linkedin.com/pulse/routing-made-easy-react-router-loader-function-sreejit-sengupta#:~:text=A%20loader%20in%20react%2Drouter,the%20route%20before%20it%20renders.)
