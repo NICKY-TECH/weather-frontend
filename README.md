@@ -1,1 +1,1 @@
-# A BASIC MERN STACK WEATHER APP ![](<a href="https://www.flaticon.com/free-icons/explosion" title="explosion icons">Explosion icons created by Freepik - Flaticon</a>)
+# A BASIC MERN STACK WEATHER APP <img src="https://static.vecteezy.com/system/resources/previews/000/552/396/non_2x/explosion-vector-icon.jpg"width="200" height="200"/>
