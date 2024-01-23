@@ -17,15 +17,15 @@
 3. MVC PATTERN
 4. ENVIRONMENTAL VARIABLES
 
-### CONCEPTS LEARNT DURING DEVELOPMENT WORKFLOW
-1. **I learnt about loaders in react and its issues.**
+## CONCEPTS LEARNT DURING DEVELOPMENT WORKFLOW
+### I learnt about loaders in react and its issues.
 * Below are some resources that will help you out in understanding loaders in react.
 1. [Routing made easy with React-Router 'loader' function.](https://www.linkedin.com/pulse/routing-made-easy-react-router-loader-function-sreejit-sengupta#:~:text=A%20loader%20in%20react%2Drouter,the%20route%20before%20it%20renders.)
 2. [Rect Router Documentation](https://reactrouter.com/en/main/route/loader)
 3. [A brief intro about loaders in react router](https://dev.to/shaancodes/a-brief-intro-about-loaders-in-react-router-54d)
 
 
-2. **Docker**
+### Docker
 * Below are some resources that will help you out in understanding docker
 1. [Docker for Beginners](https://docker-curriculum.com/)
 2. [Getting Started with Docker: A Beginner’s Guide to Docker Basics (Volume 1)](https://iopshub.medium.com/getting-started-with-docker-a-beginners-guide-to-docker-basics-volume-1-c065b8ce4ea8)
