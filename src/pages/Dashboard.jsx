@@ -54,7 +54,7 @@ function Dashboard() {
   const [code,setErrorCode]=useState(0)
   console.log("data state ")
   console.log(data)
-  const iconUrl = data!==""?`http://openweathermap.org/img/w/${
+  const iconUrl = code==true?`http://openweathermap.org/img/w/${
     data.data.weather[0].icon
   }.png`:"";
   console.log("data");
@@ -149,7 +149,7 @@ function Dashboard() {
          }
       
         {
-          data===""?  <Suspense fallback={<h1 className="text-center mt-3 font-bold">Loading....</h1>}>
+          code==false?  <Suspense fallback={<h1 className="text-center mt-3 font-bold">Loading....</h1>}>
             <Await resolve={outcome.data}>
               {(data) => {
                 const iconUrl = `http://openweathermap.org/img/w/${
