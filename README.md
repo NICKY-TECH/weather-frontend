@@ -2,6 +2,8 @@
 
 * This project uses react and node.js for its development, React was used for the UI development while node was used for developing the backend. This is a simple project to make use of my fullstack development skills
 
+## FRONT-PROJECT IS HOSTED AT [frontend](https://weather-frontend-beige.vercel.app/)
+
 ## REACT CONCEPTS USED
 
 1. ROUTER LOADER FUNCTION
