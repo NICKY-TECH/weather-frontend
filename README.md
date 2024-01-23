@@ -1,6 +1,6 @@
 # A BASIC MERN STACK WEATHER APP
 
-* This project uses react and express for its development, React was used for the UI development while node was used for developing the backend.
+* This project uses react and node.js for its development, React was used for the UI development while node was used for developing the backend. This is a simple project to make use of my fullstack development skills
 
 ## REACT CONCEPTS USED
 
