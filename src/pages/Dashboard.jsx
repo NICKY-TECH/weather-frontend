@@ -9,6 +9,8 @@ import "../styles/destination.css";
 import { FaMagnifyingGlass } from "react-icons/fa6";
 import { Suspense, useEffect, useState } from "react";
 import Logout from "../components/Logout";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 function Dashboard() {
   const navigate = useNavigation();
@@ -48,14 +50,16 @@ function Dashboard() {
   }
   const currentTime = getCurrentDayAndTime();
   let outcome = useLoaderData();
-  const [data, setData] = useState("");
-  const iconUrl = `http://openweathermap.org/img/w/${
-    data ? data.data.weather[0].icon : ""
-  }.png`;
+  const [data, setData] = useState();
+  const [code,setErrorCode]=useState(0)
+  console.log("data state ")
+  console.log(data)
+  const iconUrl = data!==""?`http://openweathermap.org/img/w/${
+    data.data.weather[0].icon
+  }.png`:"";
   console.log("data");
   console.log(outcome);
   async function getInfo() {
-   try {
     const cityValue = document.getElementById("city").value;
     const token = localStorage.getItem("data");
     const response = await fetch(
@@ -73,22 +77,29 @@ function Dashboard() {
     );
     console.log("city");
     const newData = await response.json();
+    if(newData.success==false){
+      toast.error("Invalid country name, please ensure that city indeed exist and that you have'nt entered unnecessary blank space",{
+        autoClose: 9000,
+      });
+    setErrorCode(false)
+    setData("");
+    return
+    }
+    setErrorCode(true)
     setData(newData);
-  }catch(e){
-    console.log(e)
   }
   {
     console.log("weather");
   }
   {
     console.log();
-   }
   }
   console.log("navigate properties");
   console.log(navigate.state);
   return (
     <>
       <header>
+      <ToastContainer />
         {/* <GiHamburgerMenu className="ham" /> */}
         <h1>WELCOME BACK,{localStorage.getItem("user").toUpperCase()}</h1>
 
@@ -109,8 +120,9 @@ function Dashboard() {
                 <FaMagnifyingGlass />
               </div>
             </div>
-        {data ? (
-          <>
+     
+         {
+          code===true?<>
             <div className="top-info">
               <div className="city-icon">
                 <h3 className="city-name">{data.data.name}</h3>
@@ -133,10 +145,12 @@ function Dashboard() {
                 Humidity:<span>{data.data.main.humidity}%</span>
               </p>
             </div>
-          </>
-        ) : (
-          <Suspense fallback={<h1 className="text-center mt-3 font-bold">Loading</h1>}>
-            <Await resolve={outcome.data}  errorElement={<h1>{console.log("hello")}</h1>}>
+          </>: ""
+         }
+      
+        {
+          data===""?  <Suspense fallback={<h1 className="text-center mt-3 font-bold">Loading....</h1>}>
+            <Await resolve={outcome.data}>
               {(data) => {
                 const iconUrl = `http://openweathermap.org/img/w/${
                   data ? data.data.weather[0].icon : ""
@@ -183,8 +197,8 @@ function Dashboard() {
                 );
               }}
             </Await>
-          </Suspense>
-        )}
+          </Suspense>:""
+        }
       </article>
     </>
   );
@@ -192,7 +206,7 @@ function Dashboard() {
 
 export const DashboardLoader = async () => {
   const auth = localStorage.getItem("data");
-  if (!auth) throw redirect("/");
+  if (!auth) throw redirect("/login");
   return defer({
     data: new Promise((resolve, reject) => {
       const successCallback = async (position) => {
