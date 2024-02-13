@@ -30,7 +30,6 @@ function Registration() {
           }),
         }
       );
-      console.log("jons");
       const value = await register.json();
       if (value.success == true) {
         toast.success("Account registration was successful",{
@@ -42,7 +41,7 @@ function Registration() {
       } else if (value.success == false) {
         toast.error("An error occurred while creating your account");
       }
-      console.log(value);
+
     } catch (e) {
       console.log(e);
     }
@@ -58,7 +57,6 @@ function Registration() {
     validationSchema: regSchema,
     onSubmit: submit,
   });
-  console.log(formik);
 
   return (
     <>

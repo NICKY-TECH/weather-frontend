@@ -22,7 +22,7 @@ import ErrorHandler from './pages/Error';
 
 
 function App() {
-  console.log('APP')
+
   const router = createBrowserRouter(
     createRoutesFromElements(
         <Route path="/" element={<Main/>}>

@@ -52,13 +52,11 @@ function Dashboard() {
   let outcome = useLoaderData();
   const [data, setData] = useState();
   const [code,setErrorCode]=useState(0)
-  console.log("data state ")
-  console.log(data)
+
   const iconUrl = code==true?`http://openweathermap.org/img/w/${
     data.data.weather[0].icon
   }.png`:"";
-  console.log("data");
-  console.log(outcome);
+
   async function getInfo() {
     const cityValue = document.getElementById("city").value;
     const token = localStorage.getItem("data");
@@ -75,7 +73,6 @@ function Dashboard() {
         }),
       }
     );
-    console.log("city");
     const newData = await response.json();
     if(newData.success==false){
       toast.error("Invalid country name, please ensure that city indeed exist and that you have'nt entered unnecessary blank space",{
@@ -88,14 +85,8 @@ function Dashboard() {
     setErrorCode(true)
     setData(newData);
   }
-  {
-    console.log("weather");
-  }
-  {
-    console.log();
-  }
-  console.log("navigate properties");
-  console.log(navigate.state);
+
+
   return (
     <>
       <header>
@@ -210,7 +201,6 @@ export const DashboardLoader = async () => {
   return defer({
     data: new Promise((resolve, reject) => {
       const successCallback = async (position) => {
-        console.log(position);
         const points = {
           lat: `${position.coords.latitude}`,
           long: `${position.coords.longitude}`,
@@ -239,7 +229,6 @@ export const DashboardLoader = async () => {
             });
           }
         } catch (e) {
-          console.log(e);
         }
       };
 

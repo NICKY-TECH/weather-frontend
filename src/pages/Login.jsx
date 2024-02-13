@@ -30,7 +30,6 @@ function Login() {
           }),
         }
       );
-      console.log("jons");
       const value = await register.json();
       if (value.success == true) {
         localStorage.setItem("data", `${value.data.token}`);
@@ -38,26 +37,21 @@ function Login() {
         toast.success("Login was successful", {
           autoClose: 1000,
         });
-        console.log(value);
       } else if (value.success == false) {
         toast.error("An error occurred while logging into your account");
       }
-      console.log(value);
+
     } catch (e) {
-      console.log(e);
+ 
     }
   }
-  console.log("before useeffect")
   useEffect(() => {
     const authValue = localStorage.getItem('data');
-    console.log("authValue before if statement")
-    console.log(authValue)
     if (authValue !== null && authValue !== undefined) {
-      console.log("auth exist")
          navigate("/dashboard");
  
     }else{
-            console.log("e no dey")
+      
     }
   }, [localStorage.getItem('data')]);
   const formik = useFormik({

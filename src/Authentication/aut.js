@@ -3,8 +3,6 @@ import { useNavigate, useLocation, Outlet,Navigate } from "react-router-dom";
 
 const Auth = () => {
   const auth = localStorage.getItem('data')
-  console.log('auth');
-  console.log(auth)
   const navigate = useNavigate();
   const location = useLocation();
   
